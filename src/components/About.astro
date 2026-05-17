@@ -1,0 +1,106 @@
+---
+import InkDivider from './InkDivider.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Graceful fallback — if the artist photo isn't saved yet, the
+// placeholder remains. Drop a file at src/assets/artist.{jpg,png,webp}
+// and it's automatically picked up on the next reload.
+const artistModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/artist.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+const artistPhoto = Object.values(artistModules)[0]?.default;
+---
+
+<section id="about" class="relative bg-aubergine-light py-28 px-6 overflow-hidden">
+
+  <!-- Background accents -->
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-lavender-dark/15 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-rose-dust/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+    <!-- Text -->
+    <div>
+      <p class="text-lavender text-xs tracking-[0.4em] uppercase mb-4 font-body font-medium">
+        About the Artist
+      </p>
+      <h2 class="font-heading text-5xl md:text-6xl font-light text-cream mb-8 leading-tight">
+        The art behind<br />
+        <span class="font-script text-transparent bg-clip-text bg-linear-to-r from-lavender via-cream to-rose-dust">the ink</span>
+      </h2>
+      <div class="space-y-4 text-cream/70 font-body font-light leading-relaxed text-base">
+        <p>
+          Hi, I'm <span class="text-cream">Melissa Hall</span> — Tsuki Mel Tattoo
+          — a tattoo artist based in Leith, Edinburgh. I've been drawing my whole
+          life and hold a degree in Concept Art for Video Games and Animation,
+          which gives every piece I tattoo a foundation in design and storytelling.
+        </p>
+        <p>
+          My style is a vibrant mix of <span class="text-cream">Neo-Traditional
+          and Traditional</span>, infused with the gaming, movie, and pop culture
+          references I grew up loving. Every tattoo is designed from scratch and
+          tailored to the person wearing it.
+        </p>
+        <p>
+          The studio is a safe and welcoming space for everyone — especially women
+          and the LGBTQ+ community — with strict hygiene protocols upheld for
+          every client. When I'm not tattooing, you'll find me gaming on my PC.
+          Drop me a message to start your piece, or follow
+          <a href="https://instagram.com/tsuki_melx" target="_blank" rel="noopener noreferrer" class="text-lavender hover:text-cream transition-colors">@tsuki_melx</a>
+          for new designs and works in progress.
+        </p>
+      </div>
+
+      <div class="mt-10 flex gap-6 flex-wrap items-stretch">
+        <div class="flex-1 min-w-[110px]">
+          <p class="font-heading text-xl md:text-2xl text-lavender font-light leading-tight">Neo-Traditional</p>
+          <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Style</p>
+        </div>
+        <div class="w-px bg-lavender/30 self-stretch"></div>
+        <div class="flex-1 min-w-[110px]">
+          <p class="font-heading text-xl md:text-2xl text-lavender font-light leading-tight">Concept Art</p>
+          <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Background</p>
+        </div>
+        <div class="w-px bg-lavender/30 self-stretch"></div>
+        <div class="flex-1 min-w-[110px]">
+          <p class="font-heading text-xl md:text-2xl text-lavender font-light leading-tight">Safe Space</p>
+          <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Studio</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artist image -->
+    <div class="relative">
+      <div class="aspect-[3/4] rounded-2xl overflow-hidden border border-lavender/20">
+        {artistPhoto ? (
+          <Image
+            src={artistPhoto}
+            alt="Melissa Hall — Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh"
+            class="w-full h-full object-cover"
+            widths={[400, 600, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-full h-full bg-linear-to-br from-lavender-dark/30 via-lavender/20 to-rose-dust/20 flex items-center justify-center">
+            <div class="text-center text-cream/40">
+              <svg class="w-12 h-12 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="text-sm font-body">Add artist photo here</p>
+              <p class="text-xs mt-1 opacity-60">src/assets/artist.jpg</p>
+            </div>
+          </div>
+        )}
+      </div>
+      <!-- Decorative border accent -->
+      <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border border-lavender/30 -z-10"></div>
+    </div>
+
+  </div>
+
+  <InkDivider fillColor="#1a1322" flip />
+
+</section>

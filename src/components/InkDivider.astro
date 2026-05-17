@@ -1,0 +1,50 @@
+---
+interface Props {
+  /** Hex fill colour — should match the NEXT section's background */
+  fillColor: string;
+  /** Flip the curve pattern horizontally (for visual variety) */
+  flip?: boolean;
+}
+
+const { fillColor, flip = false } = Astro.props;
+---
+
+<div class="absolute bottom-0 left-0 right-0 pointer-events-none h-40 md:h-52 overflow-hidden">
+  <svg
+    class={`w-full h-full ${flip ? '-scale-x-100' : ''}`}
+    viewBox="0 0 1440 200"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <!-- Background depth layer — softest, deepest wave -->
+    <path
+      d="M0,150
+         C300,70 600,200 900,120
+         C1140,60 1320,170 1440,130
+         L1440,200 L0,200 Z"
+      fill={fillColor}
+      opacity="0.35"
+    />
+
+    <!-- Mid layer — dramatic flowing wave -->
+    <path
+      d="M0,130
+         C220,40 460,190 720,110
+         C960,40 1200,180 1440,120
+         L1440,200 L0,200 Z"
+      fill={fillColor}
+      opacity="0.6"
+    />
+
+    <!-- Foreground — main pronounced ink wave -->
+    <path
+      d="M0,160
+         C180,80 380,200 600,140
+         C820,80 1020,210 1240,140
+         C1340,105 1400,160 1440,150
+         L1440,200 L0,200 Z"
+      fill={fillColor}
+    />
+  </svg>
+</div>

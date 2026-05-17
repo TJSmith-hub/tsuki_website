@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import GallerySection from '../components/GallerySection.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+import Footer from '../components/Footer.astro';
+import type { ImageMetadata } from 'astro';
+
+type GalleryImage = { src: ImageMetadata; alt: string };
+
+function loadGallery(
+  modules: Record<string, { default: ImageMetadata }>,
+  altPrefix: string
+): GalleryImage[] {
+  return Object.entries(modules)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([path, mod]) => {
+      const filename = path.split('/').pop()?.replace(/\.[^.]+$/, '') ?? '';
+      const subject = filename.replace(/[-_]/g, ' ');
+      return {
+        src: mod.default,
+        alt: `${altPrefix} — ${subject}, by Tsuki Mel Tattoo in Leith, Edinburgh`,
+      };
+    });
+}
+
+const blackGreyImages = loadGallery(
+  import.meta.glob<{ default: ImageMetadata }>(
+    '../assets/gallery/black-grey/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}',
+    { eager: true }
+  ),
+  'Black and grey tattoo'
+);
+
+const colourImages = loadGallery(
+  import.meta.glob<{ default: ImageMetadata }>(
+    '../assets/gallery/colour/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}',
+    { eager: true }
+  ),
+  'Neo-traditional colour tattoo'
+);
+
+const flashImages = loadGallery(
+  import.meta.glob<{ default: ImageMetadata }>(
+    '../assets/gallery/flash/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}',
+    { eager: true }
+  ),
+  'Tattoo flash design'
+);
+
+const galleries = [
+  {
+    id: 'black-grey',
+    title: 'Black & Grey',
+    description: 'Black & grey work — bold lines, fine details, and storytelling.',
+    images: blackGreyImages,
+    flip: false,
+  },
+  {
+    id: 'colour',
+    title: 'Colour Work',
+    description: 'Neo-Traditional and Traditional colour pieces, infused with pop culture, gaming, and movie references.',
+    images: colourImages,
+    flip: true,
+  },
+  {
+    id: 'flash',
+    title: 'Flash',
+    description: 'Original pre-drawn flash designs — ready to book, one tattoo each.',
+    images: flashImages,
+    flip: false,
+  },
+];
+---
+
+<Layout>
+  <NavBar />
+  <main>
+    <Hero />
+    <About />
+    {galleries.map((gallery) => (
+      <GallerySection
+        id={gallery.id}
+        title={gallery.title}
+        description={gallery.description}
+        images={gallery.images}
+        flip={gallery.flip}
+      />
+    ))}
+    <BookingCTA />
+  </main>
+  <Footer />
+</Layout>

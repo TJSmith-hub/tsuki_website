@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — pulled from @tsuki_melx aesthetic */
+  --color-aubergine: #1a1322;
+  --color-aubergine-light: #2a2032;
+  --color-plum: #3d3045;
+  --color-lavender: #c8b6d6;
+  --color-lavender-dark: #9d87b5;
+  --color-rose-dust: #d4a8b8;
+  --color-cream: #f5e8d4;
+
+  /* Typography */
+  --font-script: "Allura", "Pinyon Script", cursive;
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Raleway", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #1a1322;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1322;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9d87b5;
+  border-radius: 3px;
+}

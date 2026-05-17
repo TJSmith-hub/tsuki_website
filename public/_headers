@@ -1,0 +1,44 @@
+# Security headers — applied by Cloudflare Pages / Netlify on every response
+/*
+  # Force HTTPS for 2 years, include subdomains, allow preload-list submission
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Block this site from being framed (clickjacking protection)
+  X-Frame-Options: DENY
+
+  # Block MIME-type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Don't leak full URL on outbound clicks
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Disable browser features we don't use
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+
+  # AI training opt-out — recognised by Adobe, Bing, several AI crawlers
+  X-Robots-Tag: index, follow, max-image-preview:large, noai, noimageai
+
+  # EU TDM Reservation Protocol — required for Art. 4 opt-out under EU Copyright Directive
+  TDM-Reservation: 1
+
+  # Cross-Origin isolation
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Content Security Policy
+  # - default to self only
+  # - allow Google Fonts CSS + font files
+  # - allow inline styles (Astro emits scoped <style> tags)
+  # - no inline scripts allowed
+  # - no framing, no plugins, no base-tag hijack
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+
+# Long cache for static assets (hashed by Astro)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache fonts/images aggressively
+/gallery/*
+  Cache-Control: public, max-age=604800
+/images/*
+  Cache-Control: public, max-age=604800

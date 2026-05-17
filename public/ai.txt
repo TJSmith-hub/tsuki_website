@@ -1,0 +1,30 @@
+# AI Training Policy for tsuki.tattoo
+# ====================================
+#
+# All content on this website — including but not limited to tattoo
+# artwork, photographs, written copy, branding, and design elements —
+# is the original creative work of the artist (Mel / Tsuki Mel Tattoo)
+# and is her livelihood.
+#
+# Use of any content on this site for the training, fine-tuning,
+# evaluation, retrieval-augmented generation, or any other input to
+# machine learning models, large language models, image generation
+# systems, or AI products is EXPRESSLY PROHIBITED.
+#
+# This explicit reservation of rights is made under:
+#   - Article 4(3) of the EU Directive on Copyright in the Digital
+#     Single Market (2019/790) — TDM opt-out
+#   - The UK Copyright, Designs and Patents Act 1988
+#   - The Berne Convention
+#
+# Machine-readable opt-out is also signalled via:
+#   - robots.txt (Disallow: / for known AI crawlers)
+#   - X-Robots-Tag HTTP header (noai, noimageai)
+#   - TDM-Reservation: 1 HTTP header
+#   - <meta name="robots" content="noai, noimageai">
+#   - <meta name="tdm-reservation" content="1">
+#
+# For licensing enquiries: tsukimeltattoos@gmail.com
+
+User-Agent: *
+Disallow: /

@@ -1,0 +1,158 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = 'Tsuki Mel Tattoo | Neo-Traditional Tattoo Artist, Edinburgh',
+  description = 'Melissa Hall (Tsuki Mel) — Neo-Traditional & Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with pop culture, gaming, and movie references. LGBTQ+ inclusive.',
+  image = '/og-image.jpg',
+  type = 'website',
+} = Astro.props;
+
+const SITE_URL = Astro.site ?? new URL('https://tsuki.tattoo');
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
+const ogImageURL = new URL(image, SITE_URL);
+const personId = new URL('#person', SITE_URL).toString();
+const studioId = new URL('#studio', SITE_URL).toString();
+
+// Schema.org structured data — @graph with Person (Melissa Hall)
+// + TattooParlor (her tattoo practice). The Person/Place pairing
+// helps Google's Knowledge Graph understand both the artist and
+// the local business for "tattoo artist Leith" / "neo-traditional
+// tattoo Edinburgh" type queries.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: 'Melissa Hall',
+      alternateName: 'Tsuki Mel',
+      jobTitle: 'Tattoo Artist',
+      description:
+        'Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with pop culture and gaming references.',
+      image: ogImageURL.toString(),
+      url: SITE_URL.toString(),
+      email: 'tsukimeltattoos@gmail.com',
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'BA Concept Art for Video Games and Animation',
+      },
+      knowsAbout: [
+        'Neo-Traditional tattoo',
+        'Traditional tattoo',
+        'Black and grey tattoo',
+        'Tattoo flash',
+        'Pop culture tattoo',
+        'Video game tattoo',
+        'Concept art',
+        'Custom tattoo design',
+      ],
+      workLocation: { '@id': studioId },
+      sameAs: ['https://instagram.com/tsuki_melx'],
+    },
+    {
+      '@type': 'TattooParlor',
+      '@id': studioId,
+      name: 'Tsuki Mel Tattoo',
+      description:
+        'Custom Neo-Traditional and Traditional tattoo work by Melissa Hall in Leith, Edinburgh. LGBTQ+ inclusive, with strict hygiene protocols.',
+      url: SITE_URL.toString(),
+      image: ogImageURL.toString(),
+      email: 'tsukimeltattoos@gmail.com',
+      priceRange: '££',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Leith',
+        addressRegion: 'Edinburgh',
+        addressCountry: 'GB',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Edinburgh' },
+        { '@type': 'AdministrativeArea', name: 'Scotland' },
+      ],
+      employee: { '@id': personId },
+      knowsAbout: [
+        'Neo-Traditional tattoo',
+        'Traditional tattoo',
+        'Pop culture tattoo',
+        'LGBTQ+ inclusive tattoo studio',
+      ],
+      sameAs: ['https://instagram.com/tsuki_melx'],
+    },
+  ],
+};
+
+// JSON-LD must escape any `<` to prevent breaking out of the script tag
+const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <!-- Primary SEO -->
+    <meta name="description" content={description} />
+    <meta name="author" content="Melissa Hall (Tsuki Mel)" />
+    <meta name="keywords" content="neo-traditional tattoo Edinburgh, traditional tattoo Edinburgh, tattoo artist Leith, tattoo artist Edinburgh, pop culture tattoo, gaming tattoo, video game tattoo, LGBTQ+ tattoo artist Edinburgh, female tattoo artist Edinburgh, tattoo flash Edinburgh, Melissa Hall, Tsuki Mel" />
+    <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
+    <meta name="googlebot" content="noai, noimageai" />
+    <meta name="tdm-reservation" content="1" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Geo / local SEO -->
+    <meta name="geo.region" content="GB-EDH" />
+    <meta name="geo.placename" content="Leith, Edinburgh" />
+
+    <!-- Open Graph (Facebook, LinkedIn, Discord, iMessage) -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tsuki Mel Tattoo — custom tattoo artist in Leith, Edinburgh" />
+    <meta property="og:site_name" content="Tsuki Mel Tattoo" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Browser UX -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#1a1322" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Structured data (Schema.org TattooParlor) -->
+    <script is:inline type="application/ld+json" set:html={structuredDataJson} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Sitemap discoverability -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+  </head>
+  <body class="font-body text-cream antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,145 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tsuki.tattoo/sitemap-index.xml
+
+# ============================================================
+# AI training scrapers — DENY ALL
+# All artwork on this site is the artist's livelihood and is
+# explicitly NOT licensed for AI training, image generation
+# training datasets, or large language model training.
+# ============================================================
+
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot-User
+Disallow: /
+
+# Google (Gemini / Bard training)
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: GoogleOther-Image
+Disallow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Disallow: /
+
+# Meta / Facebook AI
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+# Common Crawl (feeds many LLMs)
+User-agent: CCBot
+Disallow: /
+
+# Amazon
+User-agent: Amazonbot
+Disallow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+# ByteDance (TikTok / Doubao)
+User-agent: Bytespider
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+# Mistral
+User-agent: MistralAI-User
+Disallow: /
+
+# DuckDuckGo AI Assist
+User-agent: DuckAssistBot
+Disallow: /
+
+# You.com
+User-agent: YouBot
+Disallow: /
+
+# Allen Institute for AI
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: AI2Bot-Dolma
+Disallow: /
+
+# Diffbot (used by many AI tools)
+User-agent: Diffbot
+Disallow: /
+
+# Image-specific scrapers
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+User-agent: LAION-DATA-COLLECTOR
+Disallow: /
+
+# Misc AI crawlers
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: VelenPublicWebCrawler
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: ICC-Crawler
+Disallow: /
+
+User-agent: Kangaroo Bot
+Disallow: /
+
+User-agent: Sidetrade indexer bot
+Disallow: /
