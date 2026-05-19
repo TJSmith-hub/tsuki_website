@@ -29,9 +29,9 @@
   # - default to self only
   # - allow Google Fonts CSS + font files
   # - allow inline styles (Astro emits scoped <style> tags)
-  # - no inline scripts allowed
+  # - allow Cloudflare Web Analytics beacon + its inline bootstrap (by hash)
   # - no framing, no plugins, no base-tag hijack
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-nis0hoGND1VofuKsWNPJmD+D/7JBAzwzE64LCMiXXRo=' static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 # Long cache for static assets (hashed by Astro)
 /_astro/*
