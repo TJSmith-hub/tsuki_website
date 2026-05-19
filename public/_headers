@@ -25,6 +25,13 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
 
+  # Content Security Policy
+  # script-src 'unsafe-inline' is required for the per-page JSON-LD <script> in Layout.astro
+  # (dynamic content, can't be hashed at build time). JSON-LD is non-executable, but the
+  # directive still allows any inline JS — acceptable here as there's no user-input surface.
+  # cloudflareinsights.com entries are for Cloudflare Web Analytics auto-injection.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+
 # Long cache for static assets (hashed by Astro)
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
