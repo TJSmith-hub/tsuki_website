@@ -13,7 +13,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
 
   # Disable browser features we don't use
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
 
   # AI training opt-out — recognised by Adobe, Bing, several AI crawlers
   X-Robots-Tag: index, follow, max-image-preview:large, noai, noimageai
@@ -24,14 +24,6 @@
   # Cross-Origin isolation
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-
-  # Content Security Policy
-  # - default to self only
-  # - allow Google Fonts CSS + font files
-  # - allow inline styles (Astro emits scoped <style> tags)
-  # - allow Cloudflare Web Analytics beacon + its inline bootstrap (by hash)
-  # - no framing, no plugins, no base-tag hijack
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-nis0hoGND1VofuKsWNPJmD+D/7JBAzwzE64LCMiXXRo=' static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 # Long cache for static assets (hashed by Astro)
 /_astro/*
