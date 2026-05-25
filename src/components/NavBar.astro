@@ -6,14 +6,14 @@ import logo from '../assets/logo.png';
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-aubergine/80 border-b border-lavender-dark/20">
-  <div class="max-w-7xl mx-auto px-6 py-1 grid grid-cols-3 items-center">
+  <div class="max-w-7xl mx-auto px-6 py-1 flex justify-between md:grid md:grid-cols-3 items-center">
 
-    <a href="#hero" class="block leading-none hover:opacity-80 transition-opacity justify-self-start" aria-label="Tsuki Mel Tattoo - home">
-      <Image src={logo} alt="Tsuki Mel Tattoo" class="h-24 w-auto" loading="eager" />
+    <a href="#hero" class="block leading-none hover:opacity-80 transition-opacity md:justify-self-start" aria-label="Tsuki Mel Tattoo - home">
+      <Image src={logo} alt="Tsuki Mel Tattoo" class="h-14 md:h-24 w-auto" loading="eager" />
     </a>
 
     <!-- Desktop nav -->
-    <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-cream/70 justify-self-center">
+    <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-cream/70 md:justify-self-center">
       <a href="#about" class="hover:text-lavender transition-colors">About</a>
       <a href="#colour" class="hover:text-lavender transition-colors">Colour</a>
       <a href="#black-grey" class="hover:text-lavender transition-colors">Black & Grey</a>
@@ -21,12 +21,12 @@ import logo from '../assets/logo.png';
     </div>
 
     <!-- CTAs -->
-    <div class="flex items-center gap-3 justify-self-end">
+    <div class="flex items-center gap-3 md:justify-self-end">
       <a
         href={INSTAGRAM_URL}
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:flex items-center gap-2 text-cream/70 hover:text-lavender transition-colors text-sm"
+        class="flex items-center gap-2 text-cream/70 hover:text-lavender transition-colors text-sm"
         aria-label="Instagram"
       >
         <InstagramIcon class="w-5 h-5" />
@@ -49,7 +49,4 @@ import logo from '../assets/logo.png';
   <a href="#colour" class="hover:text-lavender transition-colors px-3">Colour</a>
   <a href="#black-grey" class="hover:text-lavender transition-colors px-3">B&G</a>
   <a href="#flash" class="hover:text-lavender transition-colors px-3">Flash</a>
-  <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="hover:text-lavender transition-colors px-3" aria-label="Instagram">
-    <InstagramIcon class="w-4 h-4 mx-auto" />
-  </a>
 </div>
