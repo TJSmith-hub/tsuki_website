@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'Tsuki Mel Tattoo | Neo-Traditional Tattoo Artist, Edinburgh',
-  description = 'Melissa Hall (Tsuki Mel) — Neo-Traditional & Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with pop culture, gaming, and movie references. LGBTQ+ inclusive.',
+  description = 'Melissa Hall (Tsuki Mel) — Neo-Traditional & Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with fantasy and gaming references. LGBTQ+ inclusive.',
   image = '/og-image.jpg',
   type = 'website',
 } = Astro.props;
@@ -36,7 +36,7 @@ const structuredData = {
       alternateName: 'Tsuki Mel',
       jobTitle: 'Tattoo Artist',
       description:
-        'Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with pop culture and gaming references.',
+        'Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh. Custom designs rooted in fantasy and gaming worlds.',
       image: ogImageURL.toString(),
       url: SITE_URL.toString(),
       email: 'tsukimeltattoos@gmail.com',
@@ -103,7 +103,7 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
     <!-- Primary SEO -->
     <meta name="description" content={description} />
     <meta name="author" content="Melissa Hall (Tsuki Mel)" />
-    <meta name="keywords" content="neo-traditional tattoo Edinburgh, traditional tattoo Edinburgh, tattoo artist Leith, tattoo artist Edinburgh, pop culture tattoo, gaming tattoo, video game tattoo, LGBTQ+ tattoo artist Edinburgh, female tattoo artist Edinburgh, tattoo flash Edinburgh, Melissa Hall, Tsuki Mel" />
+    <meta name="keywords" content="neo-traditional tattoo Edinburgh, traditional tattoo Edinburgh, tattoo artist Leith, tattoo artist Edinburgh, fantasy tattoo, gaming tattoo, video game tattoo, LGBTQ+ tattoo artist Edinburgh, female tattoo artist Edinburgh, tattoo flash Edinburgh, Melissa Hall, Tsuki Mel" />
     <meta name="robots" content="index, follow, max-image-preview:large, noai, noimageai" />
     <meta name="googlebot" content="noai, noimageai" />
     <meta name="tdm-reservation" content="1" />
@@ -154,5 +154,26 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
   </head>
   <body class="font-body text-cream antialiased">
     <slot />
+    <script>
+      const items = document.querySelectorAll<HTMLElement>('.reveal');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const obs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+        );
+        items.forEach((el) => obs.observe(el));
+      }
+    </script>
   </body>
 </html>

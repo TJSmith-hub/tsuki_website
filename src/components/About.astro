@@ -13,7 +13,7 @@ const artistModules = import.meta.glob<{ default: ImageMetadata }>(
 const artistPhoto = Object.values(artistModules)[0]?.default;
 ---
 
-<section id="about" class="relative bg-aubergine-light py-28 px-6 overflow-hidden">
+<section id="about" class="relative bg-aubergine-light pt-28 pb-36 px-6 overflow-hidden">
 
   <!-- Background accents -->
   <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-lavender-dark/15 rounded-full blur-[120px] pointer-events-none"></div>
@@ -22,7 +22,7 @@ const artistPhoto = Object.values(artistModules)[0]?.default;
   <div class="relative z-10 max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
     <!-- Text -->
-    <div>
+    <div class="reveal reveal-left">
       <p class="text-lavender text-xs tracking-[0.4em] uppercase mb-4 font-body font-medium">
         About the Artist
       </p>
@@ -32,20 +32,19 @@ const artistPhoto = Object.values(artistModules)[0]?.default;
       </h2>
       <div class="space-y-4 text-cream/70 font-body font-light leading-relaxed text-base">
         <p>
-          Hi, I'm <span class="text-cream">Melissa Hall</span> — Tsuki Mel Tattoo
-          — a tattoo artist based in Leith, Edinburgh. I've been drawing my whole
+          Hi, I'm <span class="text-cream">Mel</span>, Tsuki Mel Tattoo, 
+          a tattoo artist based in Leith, Edinburgh. I've been drawing my whole
           life and hold a degree in Concept Art for Video Games and Animation,
           which gives every piece I tattoo a foundation in design and storytelling.
         </p>
         <p>
           My style is a vibrant mix of <span class="text-cream">Neo-Traditional
-          and Traditional</span>, infused with the gaming, movie, and pop culture
-          references I grew up loving. Every tattoo is designed from scratch and
-          tailored to the person wearing it.
+          and Illustrative</span> with a fantasy and gaming twist. Every tattoo is designed from scratch and
+          tailored to the person.
         </p>
         <p>
-          The studio is a safe and welcoming space for everyone — especially women
-          and the LGBTQ+ community — with strict hygiene protocols upheld for
+          I am committed to creating a safe and welcoming space for everyone, especially women
+          and the LGBTQ+ community. I follow strict hygiene protocols upheld for
           every client. When I'm not tattooing, you'll find me gaming on my PC.
           Drop me a message to start your piece, or follow
           <a href="https://instagram.com/tsuki_melx" target="_blank" rel="noopener noreferrer" class="text-lavender hover:text-cream transition-colors">@tsuki_melx</a>
@@ -72,7 +71,7 @@ const artistPhoto = Object.values(artistModules)[0]?.default;
     </div>
 
     <!-- Artist image -->
-    <div class="relative">
+    <div class="relative reveal reveal-right" style="--reveal-delay: 120ms">
       <div class="aspect-[3/4] rounded-2xl overflow-hidden border border-lavender/20">
         {artistPhoto ? (
           <Image

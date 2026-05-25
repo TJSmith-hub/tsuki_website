@@ -29,7 +29,7 @@ const lightboxImages = await Promise.all(
 );
 ---
 
-<section id={id} class={`relative ${bgClass} py-28 px-6 overflow-hidden`}>
+<section id={id} class={`relative ${bgClass} pt-20 pb-36 px-6 overflow-hidden`}>
 
   <!-- Background glows -->
   <div class="absolute top-1/2 left-1/4 w-[500px] h-[400px] bg-lavender-dark/12 rounded-full blur-[120px] pointer-events-none"></div>
@@ -38,8 +38,7 @@ const lightboxImages = await Promise.all(
   <div class="relative z-10 max-w-7xl mx-auto">
 
     <!-- Section header -->
-    <div class="text-center mb-16">
-      <p class="font-script text-3xl text-lavender mb-2">Gallery</p>
+    <div class="text-center mb-16 reveal">
       <h2 class="font-heading text-5xl md:text-6xl font-light text-cream">{title}</h2>
       {description && (
         <p class="text-cream/50 font-body font-light text-base mt-4 max-w-md mx-auto">{description}</p>
@@ -50,10 +49,11 @@ const lightboxImages = await Promise.all(
     <!-- Image grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
       {lightboxImages.length > 0 ? (
-        lightboxImages.map((img) => (
+        lightboxImages.map((img, i) => (
           <button
             type="button"
-            class="group aspect-square overflow-hidden rounded-xl border border-lavender/20 hover:border-lavender/50 focus-visible:border-lavender focus-visible:outline-none transition-colors cursor-pointer p-0 bg-transparent"
+            class="group aspect-square overflow-hidden rounded-xl border border-lavender/20 hover:border-lavender/50 focus-visible:border-lavender focus-visible:outline-none transition-colors cursor-pointer p-0 bg-transparent reveal reveal-scale"
+            style={`--reveal-delay: ${(i % 6) * 70}ms`}
             data-lightbox-src={img.fullSrc}
             data-lightbox-alt={img.alt}
             aria-label={`View larger: ${img.alt}`}
@@ -70,7 +70,10 @@ const lightboxImages = await Promise.all(
         ))
       ) : (
         Array.from({ length: placeholderCount }).map((_, i) => (
-          <div class="aspect-square rounded-xl bg-linear-to-br from-lavender-dark/15 via-lavender/10 to-rose-dust/15 border border-lavender/20 flex flex-col items-center justify-center gap-2 text-lavender/30 hover:border-lavender/50 hover:text-lavender/60 transition-all">
+          <div
+            class="aspect-square rounded-xl bg-linear-to-br from-lavender-dark/15 via-lavender/10 to-rose-dust/15 border border-lavender/20 flex flex-col items-center justify-center gap-2 text-lavender/30 hover:border-lavender/50 hover:text-lavender/60 transition-all reveal reveal-scale"
+            style={`--reveal-delay: ${i * 70}ms`}
+          >
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.75" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
