@@ -11,10 +11,14 @@ const currentYear = new Date().getFullYear();
 
     <div class="flex flex-col md:flex-row items-center justify-between gap-8">
 
-      <!-- Brand -->
+      <!-- Brand + NAP (crawlable address reinforces the TattooParlor schema for local search) -->
       <div class="text-center md:text-left">
         <p class="font-script text-4xl text-cream leading-none">Tsuki Mel Tattoo</p>
-        <p class="text-cream/40 text-xs tracking-widest uppercase mt-2 font-body">Custom Tattoo Artist · Leith, Edinburgh</p>
+        <address class="text-cream/40 text-xs tracking-widest uppercase mt-2 font-body not-italic leading-relaxed">
+          Resident Artist at
+          <a href="https://www.theburrowtattoo.co.uk/" target="_blank" rel="noopener noreferrer" class="hover:text-lavender transition-colors">The Burrow Tattoo</a><br />
+          54 Timber Bush · Leith · Edinburgh · EH6 6QH
+        </address>
       </div>
 
       <!-- Nav links -->

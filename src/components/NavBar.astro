@@ -1,17 +1,19 @@
 ---
+import { Image } from 'astro:assets';
 import { BOOKING_URL, INSTAGRAM_URL } from '../constants';
 import InstagramIcon from './InstagramIcon.astro';
+import logo from '../assets/logo.png';
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-aubergine/80 border-b border-lavender-dark/20">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-6 py-1 grid grid-cols-3 items-center">
 
-    <a href="#hero" class="font-script text-3xl text-cream tracking-wide hover:text-lavender transition-colors leading-none">
-      Tsuki Mel
+    <a href="#hero" class="block leading-none hover:opacity-80 transition-opacity justify-self-start" aria-label="Tsuki Mel Tattoo - home">
+      <Image src={logo} alt="Tsuki Mel Tattoo" class="h-24 w-auto" loading="eager" />
     </a>
 
     <!-- Desktop nav -->
-    <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-cream/70">
+    <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-cream/70 justify-self-center">
       <a href="#about" class="hover:text-lavender transition-colors">About</a>
       <a href="#colour" class="hover:text-lavender transition-colors">Colour</a>
       <a href="#black-grey" class="hover:text-lavender transition-colors">Black & Grey</a>
@@ -19,7 +21,7 @@ import InstagramIcon from './InstagramIcon.astro';
     </div>
 
     <!-- CTAs -->
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 justify-self-end">
       <a
         href={INSTAGRAM_URL}
         target="_blank"
@@ -34,7 +36,7 @@ import InstagramIcon from './InstagramIcon.astro';
         href={BOOKING_URL}
         class="bg-linear-to-r from-lavender-dark to-rose-dust text-aubergine text-sm px-5 py-2 rounded-full hover:opacity-90 hover:shadow-lg hover:shadow-lavender-dark/30 transition-all font-medium tracking-wide"
       >
-        Book Now
+        Enquire
       </a>
     </div>
 

@@ -32,10 +32,12 @@ const artistPhoto = Object.values(artistModules)[0]?.default;
       </h2>
       <div class="space-y-4 text-cream/70 font-body font-light leading-relaxed text-base">
         <p>
-          Hi, I'm <span class="text-cream">Mel</span>, Tsuki Mel Tattoo, 
-          a tattoo artist based in Leith, Edinburgh. I've been drawing my whole
-          life and hold a degree in Concept Art for Video Games and Animation,
-          which gives every piece I tattoo a foundation in design and storytelling.
+          Hi, I'm <span class="text-cream">Mel</span>, Tsuki Mel Tattoo, a resident
+          artist at
+          <a href="https://www.theburrowtattoo.co.uk/" target="_blank" rel="noopener noreferrer" class="text-lavender hover:text-cream transition-colors">The Burrow Tattoo</a>
+          in Leith, Edinburgh. I've been drawing my whole life
+          and hold a degree in Concept Art for Video Games and Animation, which
+          gives every piece I tattoo a foundation in design and storytelling.
         </p>
         <p>
           My style is a vibrant mix of <span class="text-cream">Neo-Traditional
@@ -76,7 +78,7 @@ const artistPhoto = Object.values(artistModules)[0]?.default;
         {artistPhoto ? (
           <Image
             src={artistPhoto}
-            alt="Melissa Hall — Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh"
+            alt="Mel, Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh"
             class="w-full h-full object-cover"
             widths={[400, 600, 800]}
             sizes="(min-width: 768px) 50vw, 100vw"

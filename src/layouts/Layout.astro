@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'Tsuki Mel Tattoo | Neo-Traditional Tattoo Artist, Edinburgh',
-  description = 'Melissa Hall (Tsuki Mel) — Neo-Traditional & Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with fantasy and gaming references. LGBTQ+ inclusive.',
+  description = 'Melissa Hall (Tsuki Mel) - Neo-Traditional & Traditional tattoo artist in Leith, Edinburgh. Custom designs infused with fantasy and gaming references. LGBTQ+ inclusive.',
   image = '/og-image.jpg',
   type = 'website',
 } = Astro.props;
@@ -19,13 +19,16 @@ const SITE_URL = Astro.site ?? new URL('https://tsuki.tattoo');
 const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
 const ogImageURL = new URL(image, SITE_URL);
 const personId = new URL('#person', SITE_URL).toString();
-const studioId = new URL('#studio', SITE_URL).toString();
+// Using The Burrow's own URL as @id signals to Google that this is the
+// same entity described on their site, so the citations reinforce
+// rather than fragment.
+const studioId = 'https://www.theburrowtattoo.co.uk/#tattooparlor';
 
-// Schema.org structured data — @graph with Person (Melissa Hall)
-// + TattooParlor (her tattoo practice). The Person/Place pairing
-// helps Google's Knowledge Graph understand both the artist and
-// the local business for "tattoo artist Leith" / "neo-traditional
-// tattoo Edinburgh" type queries.
+// Schema.org structured data — @graph with Person (Melissa Hall, the
+// brand "Tsuki Mel Tattoo") and the TattooParlor where she works
+// (The Burrow Tattoo, Leith). Linking the Person to a Place with a
+// full street address is what powers local-pack ranking for queries
+// like "tattoo artist Leith" / "neo-traditional tattoo Edinburgh".
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -36,7 +39,7 @@ const structuredData = {
       alternateName: 'Tsuki Mel',
       jobTitle: 'Tattoo Artist',
       description:
-        'Neo-Traditional and Traditional tattoo artist in Leith, Edinburgh. Custom designs rooted in fantasy and gaming worlds.',
+        'Neo-Traditional and Traditional tattoo artist, resident at The Burrow Tattoo in Leith, Edinburgh. Custom designs rooted in fantasy and gaming worlds.',
       image: ogImageURL.toString(),
       url: SITE_URL.toString(),
       email: 'tsukimeltattoos@gmail.com',
@@ -60,31 +63,31 @@ const structuredData = {
     {
       '@type': 'TattooParlor',
       '@id': studioId,
-      name: 'Tsuki Mel Tattoo',
-      description:
-        'Custom Neo-Traditional and Traditional tattoo work by Melissa Hall in Leith, Edinburgh. LGBTQ+ inclusive, with strict hygiene protocols.',
-      url: SITE_URL.toString(),
-      image: ogImageURL.toString(),
-      email: 'tsukimeltattoos@gmail.com',
+      name: 'The Burrow Tattoo',
+      url: 'https://www.theburrowtattoo.co.uk/',
+      email: 'theburrowtattoo@hotmail.com',
       priceRange: '££',
       address: {
         '@type': 'PostalAddress',
+        streetAddress: '54 Timber Bush',
         addressLocality: 'Leith',
         addressRegion: 'Edinburgh',
+        postalCode: 'EH6 6QH',
         addressCountry: 'GB',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 55.976575,
+        longitude: -3.168405,
       },
       areaServed: [
         { '@type': 'City', name: 'Edinburgh' },
         { '@type': 'AdministrativeArea', name: 'Scotland' },
       ],
-      employee: { '@id': personId },
-      knowsAbout: [
-        'Neo-Traditional tattoo',
-        'Traditional tattoo',
-        'Pop culture tattoo',
-        'LGBTQ+ inclusive tattoo studio',
+      sameAs: [
+        'https://www.instagram.com/theburrowedinburgh/',
+        'https://share.google/8CCbeZrJjnDxnPdmo',
       ],
-      sameAs: ['https://instagram.com/tsuki_melx'],
     },
   ],
 };
@@ -112,6 +115,8 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
     <!-- Geo / local SEO -->
     <meta name="geo.region" content="GB-EDH" />
     <meta name="geo.placename" content="Leith, Edinburgh" />
+    <meta name="geo.position" content="55.976575;-3.168405" />
+    <meta name="ICBM" content="55.976575, -3.168405" />
 
     <!-- Open Graph (Facebook, LinkedIn, Discord, iMessage) -->
     <meta property="og:type" content={type} />
@@ -119,9 +124,9 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Tsuki Mel Tattoo — custom tattoo artist in Leith, Edinburgh" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Tsuki Mel Tattoo - custom tattoo artist in Leith, Edinburgh" />
     <meta property="og:site_name" content="Tsuki Mel Tattoo" />
     <meta property="og:locale" content="en_GB" />
 
