@@ -1,0 +1,24 @@
+{
+  "name": "tsuki-website",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "forwardPorts": [4321, 8787],
+  "portsAttributes": {
+    "4321": { "label": "Astro dev", "onAutoForward": "openBrowser" },
+    "8787": { "label": "Wrangler" }
+  },
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "remoteUser": "node"
+}

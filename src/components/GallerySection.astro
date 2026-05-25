@@ -1,6 +1,6 @@
 ---
 import InkDivider from './InkDivider.astro';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface GalleryImage {
@@ -19,7 +19,14 @@ interface Props {
 const { id, title, description, images, flip = false } = Astro.props;
 const placeholderCount = 6;
 const bgClass = flip ? 'bg-aubergine-light' : 'bg-aubergine';
-const waveColor = flip ? '#1a1322' : '#2a2032';
+const waveColor = flip ? '#14101c' : '#3a2b4d';
+
+const lightboxImages = await Promise.all(
+  images.map(async (img) => {
+    const full = await getImage({ src: img.src, width: 1600 });
+    return { ...img, fullSrc: full.src };
+  })
+);
 ---
 
 <section id={id} class={`relative ${bgClass} py-28 px-6 overflow-hidden`}>
@@ -42,9 +49,15 @@ const waveColor = flip ? '#1a1322' : '#2a2032';
 
     <!-- Image grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-      {images.length > 0 ? (
-        images.map((img) => (
-          <div class="group aspect-square overflow-hidden rounded-xl border border-lavender/20 hover:border-lavender/50 transition-colors cursor-pointer">
+      {lightboxImages.length > 0 ? (
+        lightboxImages.map((img) => (
+          <button
+            type="button"
+            class="group aspect-square overflow-hidden rounded-xl border border-lavender/20 hover:border-lavender/50 focus-visible:border-lavender focus-visible:outline-none transition-colors cursor-pointer p-0 bg-transparent"
+            data-lightbox-src={img.fullSrc}
+            data-lightbox-alt={img.alt}
+            aria-label={`View larger: ${img.alt}`}
+          >
             <Image
               src={img.src}
               alt={img.alt}
@@ -53,7 +66,7 @@ const waveColor = flip ? '#1a1322' : '#2a2032';
               widths={[400, 600, 800]}
               sizes="(min-width: 768px) 33vw, 50vw"
             />
-          </div>
+          </button>
         ))
       ) : (
         Array.from({ length: placeholderCount }).map((_, i) => (

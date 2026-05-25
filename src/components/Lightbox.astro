@@ -1,0 +1,94 @@
+---
+---
+
+<dialog id="lightbox" aria-label="Image viewer">
+  <button
+    type="button"
+    class="lightbox-close"
+    aria-label="Close image"
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  <img class="lightbox-img" alt="" />
+</dialog>
+
+<style is:global>
+  #lightbox {
+    background: transparent;
+    padding: 0;
+    border: 0;
+    max-width: none;
+    max-height: none;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    overscroll-behavior: contain;
+  }
+  #lightbox[open] {
+    display: flex;
+  }
+  #lightbox::backdrop {
+    background: rgba(20, 16, 28, 0.94);
+    backdrop-filter: blur(10px);
+  }
+  #lightbox .lightbox-img {
+    max-width: min(95vw, 1600px);
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  }
+  #lightbox .lightbox-close {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(200, 182, 214, 0.4);
+    background: rgba(20, 16, 28, 0.6);
+    color: #f5e8d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+  }
+  #lightbox .lightbox-close:hover {
+    border-color: rgba(200, 182, 214, 0.9);
+    background: rgba(20, 16, 28, 0.85);
+    transform: scale(1.06);
+  }
+</style>
+
+<script>
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+  if (dialog) {
+    const img = dialog.querySelector('.lightbox-img') as HTMLImageElement;
+    const closeBtn = dialog.querySelector('.lightbox-close') as HTMLButtonElement;
+
+    document.addEventListener('click', (e) => {
+      const trigger = (e.target as HTMLElement).closest<HTMLElement>('[data-lightbox-src]');
+      if (!trigger) return;
+      e.preventDefault();
+      img.src = trigger.dataset.lightboxSrc ?? '';
+      img.alt = trigger.dataset.lightboxAlt ?? '';
+      dialog.showModal();
+    });
+
+    closeBtn.addEventListener('click', () => dialog.close());
+
+    // Close when clicking the backdrop (i.e. on the dialog itself, not its children)
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('close', () => {
+      img.removeAttribute('src');
+    });
+  }
+</script>

@@ -2,9 +2,9 @@
 
 @theme {
   /* Brand palette — pulled from @tsuki_melx aesthetic */
-  --color-aubergine: #1a1322;
-  --color-aubergine-light: #2a2032;
-  --color-plum: #3d3045;
+  --color-aubergine: #14101c;
+  --color-aubergine-light: #3a2b4d;
+  --color-plum: #5a4470;
   --color-lavender: #c8b6d6;
   --color-lavender-dark: #9d87b5;
   --color-rose-dust: #d4a8b8;
@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  background-color: #1a1322;
+  background-color: #14101c;
 }
 
 ::-webkit-scrollbar {
@@ -29,7 +29,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1322;
+  background: #14101c;
 }
 
 ::-webkit-scrollbar-thumb {
